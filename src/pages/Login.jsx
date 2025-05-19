@@ -23,7 +23,7 @@ function Login() {
       <h1>Login</h1>
 
       {isLoggedIn ? (
-        <p>✅ Du er logget inn som <strong>{username}</strong></p>
+        <p>Du er logget inn som <strong>{username}</strong></p>
       ) : (
         <form handleSubmit={handleSubmit}> 
           <div>
@@ -35,8 +35,24 @@ function Login() {
               onChange={(e) => setUsername(e.target.value)}
             />
           </div>
-          </form>  
+          <div>
+            <label htmlFor="password">Passord:</label>
+            <input
+              type="text" 
+              id="password"
+              value={password}
+              onChange={(e) => setPassword(e.target.value)}
+            />
+          </div>
+
+          {error && <p style={{ color: "red" }}>{error}</p>}
+
+          <button type="submit">Logg inn</button>
+        </form>
       )}
     </div>
   );
 }
+
+export default Login;
+
