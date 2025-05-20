@@ -1,10 +1,27 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 
 function Login() {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
   const [error, setError] = useState("");
   const [isLoggedIn, setIsLoggedIn] = useState(false);
+
+  
+  useEffect(() => {
+    const storedLogin = localStorage.getItem("isLoggedIn");
+    const storedUser = localStorage.getItem("username");
+
+    if (storedLogin === "true" && storedUser) {
+      setIsLoggedIn(true);
+      setUsername(storedUser);
+    }
+  }, []);
+
+  
+  useEffect(() => {
+    localStorage.setItem("isLoggedIn", isLoggedIn);
+    localStorage.setItem("username", username);
+  }, [isLoggedIn, username]);
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -25,7 +42,7 @@ function Login() {
       {isLoggedIn ? (
         <p>Du er logget inn som <strong>{username}</strong></p>
       ) : (
-        <form onSubmit={handleSubmit}> 
+        <form onSubmit={handleSubmit}>
           <div>
             <label htmlFor="username">Brukernavn:</label>
             <input
@@ -39,7 +56,7 @@ function Login() {
           <div>
             <label htmlFor="password">Passord:</label>
             <input
-              type="password" 
+              type="password"
               id="password"
               value={password}
               onChange={(e) => setPassword(e.target.value)}
