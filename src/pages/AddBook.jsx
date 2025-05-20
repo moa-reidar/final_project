@@ -5,8 +5,17 @@ function AddBook() {
   const [title, setTitle] = useState("");
   const [author, setAuthor] = useState("");
   const [error, setError] = useState("");
-  const [books, setBooks] = useState([]);
+  const [books, setBooks] = useState(() => {
+    const storedBooks = localStorage.getItem("books");
+    return storedBooks ? JSON.parse(storedBooks) : [];
+  });
 
+  
+  useEffect(() => {
+    localStorage.setItem("books", JSON.stringify(books));
+  }, [books]);
+
+  
   useEffect(() => {
     const storedLogin = localStorage.getItem("isLoggedIn");
     if (storedLogin === "true") {
