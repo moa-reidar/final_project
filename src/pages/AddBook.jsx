@@ -5,7 +5,7 @@ function AddBook() {
   const [title, setTitle] = useState("");
   const [author, setAuthor] = useState("");
   const [error, setError] = useState("");
-  const [books, setBooks] = useState([]); // lagrer bøkene, men viser dem ikke
+  const [books, setBooks] = useState([]);
 
   useEffect(() => {
     const storedLogin = localStorage.getItem("isLoggedIn");
@@ -66,6 +66,19 @@ function AddBook() {
 
         <button type="submit">Legg til bok</button>
       </form>
+
+      {books.length > 0 && (
+        <div>
+          <h2>Lagrede bøker:</h2>
+          <ul>
+            {books.map((book, index) => (
+              <li key={index}>
+                {book.title} av {book.author}
+              </li>
+            ))}
+          </ul>
+        </div>
+      )}
     </div>
   );
 }
