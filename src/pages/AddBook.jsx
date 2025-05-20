@@ -2,6 +2,9 @@ import { useState, useEffect } from "react";
 
 function AddBook() {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
+  const [title, setTitle] = useState("");
+  const [author, setAuthor] = useState("");
+  const [error, setError] = useState("");
 
   useEffect(() => {
     const storedLogin = localStorage.getItem("isLoggedIn");
@@ -22,7 +25,31 @@ function AddBook() {
   return (
     <div>
       <h1>Add Book</h1>
-      <p>Her kan du legge til en ny bok (skjema kommer senere).</p>
+      <form onSubmit={handleSubmit}>
+        <div>
+          <label htmlFor="title">Tittel:</label>
+          <input
+            type="text"
+            id="title"
+            value={title}
+            onChange={(e) => setTitle(e.target.value)}
+          />
+        </div>
+
+        <div>
+          <label htmlFor="author">Forfatter:</label>
+          <input
+            type="text"
+            id="author"
+            value={author}
+            onChange={(e) => setAuthor(e.target.value)}
+          />
+        </div>
+
+        {error && <p style={{ color: "red" }}>{error}</p>}
+
+        <button>Legg til bok</button>
+      </form>
     </div>
   );
 }
