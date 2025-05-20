@@ -25,7 +25,7 @@ function Login() {
       {isLoggedIn ? (
         <p>Du er logget inn som <strong>{username}</strong></p>
       ) : (
-        <form handleSubmit={handleSubmit}> 
+        <form onSubmit={handleSubmit}> 
           <div>
             <label htmlFor="username">Brukernavn:</label>
             <input
@@ -35,10 +35,11 @@ function Login() {
               onChange={(e) => setUsername(e.target.value)}
             />
           </div>
+
           <div>
             <label htmlFor="password">Passord:</label>
             <input
-              type="text" 
+              type="password" 
               id="password"
               value={password}
               onChange={(e) => setPassword(e.target.value)}
@@ -55,4 +56,3 @@ function Login() {
 }
 
 export default Login;
-
