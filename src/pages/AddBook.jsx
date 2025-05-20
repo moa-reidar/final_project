@@ -31,7 +31,10 @@ function AddBook() {
     }
 
     const newBook = { title, author };
-    setBooks((prev) => [...prev, newBook]);
+    const updatedBooks = [...books, newBook];
+    setBooks(updatedBooks);
+    localStorage.setItem("books", JSON.stringify(updatedBooks));
+
     setTitle("");
     setAuthor("");
     setError("");
@@ -40,7 +43,7 @@ function AddBook() {
   const handleDelete = (indexToRemove) => {
     const updatedBooks = books.filter((book, index) => index !== indexToRemove);
     setBooks(updatedBooks);
-    
+    localStorage.setItem("books", JSON.stringify(updatedBooks));
   };
 
   if (!isLoggedIn) {
