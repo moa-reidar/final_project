@@ -5,6 +5,7 @@ function AddBook() {
   const [title, setTitle] = useState("");
   const [author, setAuthor] = useState("");
   const [error, setError] = useState("");
+  const [books, setBooks] = useState([]); // lagrer bøkene, men viser dem ikke
 
   useEffect(() => {
     const storedLogin = localStorage.getItem("isLoggedIn");
@@ -12,6 +13,21 @@ function AddBook() {
       setIsLoggedIn(true);
     }
   }, []);
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+
+    if (!title || !author) {
+      setError("Alle felt må fylles ut.");
+      return;
+    }
+
+    const newBook = { title, author };
+    setBooks((prev) => [...prev, newBook]);
+    setTitle("");
+    setAuthor("");
+    setError("");
+  };
 
   if (!isLoggedIn) {
     return (
@@ -48,7 +64,7 @@ function AddBook() {
 
         {error && <p style={{ color: "red" }}>{error}</p>}
 
-        <button>Legg til bok</button>
+        <button type="submit">Legg til bok</button>
       </form>
     </div>
   );
