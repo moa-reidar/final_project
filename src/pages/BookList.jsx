@@ -1,5 +1,14 @@
+import { useEffect, useState } from "react";
+
 function BookList() {
-  const isLoggedIn = localStorage.getItem("isLoggedIn");
+  const [isLoggedIn, setIsLoggedIn] = useState(false);
+
+  useEffect(() => {
+    const storedLogin = localStorage.getItem("isLoggedIn");
+    if (storedLogin === "true") {
+      setIsLoggedIn(true);
+    }
+  }, []);
 
   if (!isLoggedIn) {
     return (
