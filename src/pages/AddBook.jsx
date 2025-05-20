@@ -5,6 +5,7 @@ function AddBook() {
   const [title, setTitle] = useState("");
   const [author, setAuthor] = useState("");
   const [error, setError] = useState("");
+  const [searchTerm, setSearchTerm] = useState("");
 
   const [books, setBooks] = useState(() => {
     const storedBooks = localStorage.getItem("books");
@@ -87,13 +88,30 @@ function AddBook() {
       {books.length > 0 && (
         <div>
           <h2>Lagrede bøker:</h2>
+
+          <div>
+            <label htmlFor="search">Søk:</label>
+            <input
+              type="text"
+              id="search"
+              placeholder="Søk etter tittel eller forfatter"
+              value={searchTerm}
+              onChange={(e) => setSearchTerm(e.target.value)}
+            />
+          </div>
+
           <ul>
-            {books.map((book, index) => (
-              <li key={index}>
-                {book.title} av {book.author}
-                <button onClick={() => handleDelete(index)}>🗑️ Slett</button>
-              </li>
-            ))}
+            {books
+              .filter((book) =>
+                book.title.toLowerCase().includes(searchTerm.toLowerCase()) ||
+                book.author.toLowerCase().includes(searchTerm.toLowerCase())
+              )
+              .map((book, index) => (
+                <li key={index}>
+                  {book.title} av {book.author}
+                  <button onClick={() => handleDelete(index)}>🗑️ Slett</button>
+                </li>
+              ))}
           </ul>
         </div>
       )}
