@@ -5,17 +5,16 @@ function AddBook() {
   const [title, setTitle] = useState("");
   const [author, setAuthor] = useState("");
   const [error, setError] = useState("");
+
   const [books, setBooks] = useState(() => {
     const storedBooks = localStorage.getItem("books");
     return storedBooks ? JSON.parse(storedBooks) : [];
   });
 
-  
   useEffect(() => {
     localStorage.setItem("books", JSON.stringify(books));
   }, [books]);
 
-  
   useEffect(() => {
     const storedLogin = localStorage.getItem("isLoggedIn");
     if (storedLogin === "true") {
@@ -36,6 +35,12 @@ function AddBook() {
     setTitle("");
     setAuthor("");
     setError("");
+  };
+
+  const handleDelete = (indexToRemove) => {
+    const updatedBooks = books.filter((book, index) => index !== indexToRemove);
+    setBooks(updatedBooks);
+    
   };
 
   if (!isLoggedIn) {
@@ -83,6 +88,7 @@ function AddBook() {
             {books.map((book, index) => (
               <li key={index}>
                 {book.title} av {book.author}
+                <button onClick={() => handleDelete(index)}>🗑️ Slett</button>
               </li>
             ))}
           </ul>
