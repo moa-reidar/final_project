@@ -20,7 +20,7 @@ function BookList() {
   }, []);
 
   const handleDelete = (indexToRemove) => {
-    const updatedbooks = books.filter((_, index) => index !== indexToRemove);
+    const updatedBooks = books.filter((_, index) => index !== indexToRemove);
     setBooks(updatedBooks);
     localStorage.setItem("books", JSON.stringify(updatedBooks));
   };
