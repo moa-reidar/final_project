@@ -1,21 +1,10 @@
 import { useState, useEffect } from "react";
-import BookCard from "../components/BookCard";
 
 function AddBook() {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
   const [title, setTitle] = useState("");
   const [author, setAuthor] = useState("");
   const [error, setError] = useState("");
-  const [searchTerm, setSearchTerm] = useState("");
-
-  const [books, setBooks] = useState(() => {
-    const storedBooks = localStorage.getItem("books");
-    return storedBooks ? JSON.parse(storedBooks) : [];
-  });
-
-  useEffect(() => {
-    localStorage.setItem("books", JSON.stringify(books));
-  }, [books]);
 
   useEffect(() => {
     const storedLogin = localStorage.getItem("isLoggedIn");
@@ -33,19 +22,15 @@ function AddBook() {
     }
 
     const newBook = { title, author };
-    const updatedBooks = [...books, newBook];
-    setBooks(updatedBooks);
+    const storedBooks = localStorage.getItem("books");
+    const parsedBooks = storedBooks ? JSON.parse(storedBooks) : [];
+
+    const updatedBooks = [...parsedBooks, newBook];
     localStorage.setItem("books", JSON.stringify(updatedBooks));
 
     setTitle("");
     setAuthor("");
     setError("");
-  };
-
-  const handleDelete = (indexToRemove) => {
-    const updatedBooks = books.filter((book, index) => index !== indexToRemove);
-    setBooks(updatedBooks);
-    localStorage.setItem("books", JSON.stringify(updatedBooks));
   };
 
   if (!isLoggedIn) {
@@ -85,39 +70,6 @@ function AddBook() {
 
         <button type="submit">Legg til bok</button>
       </form>
-
-      {books.length > 0 && (
-        <div>
-          <h2>Lagrede bøker:</h2>
-
-          <div>
-            <label htmlFor="search">Søk:</label>
-            <input
-              type="text"
-              id="search"
-              placeholder="Søk etter tittel eller forfatter"
-              value={searchTerm}
-              onChange={(e) => setSearchTerm(e.target.value)}
-            />
-          </div>
-
-          <ul>
-            {books
-              .filter((book) =>
-                book.title.toLowerCase().includes(searchTerm.toLowerCase()) ||
-                book.author.toLowerCase().includes(searchTerm.toLowerCase())
-              )
-              .map((book, index) => (
-                <BookCard
-                key={index}
-                title={book.title}
-                author={book.author}
-                onDelete={() => handleDelete(index)}
-              />
-              ))}
-          </ul>
-        </div>
-      )}
     </div>
   );
 }
