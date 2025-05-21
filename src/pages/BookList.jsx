@@ -4,6 +4,7 @@ import BookCard from "../components/BookCard";
 function BookList() {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
   const [books, setBooks] = useState([]);
+  const [searchTerm, setSearchTerm] = useState("");
 
   useEffect(() => {
     const storedLogin = localStorage.getItem("isLoggedIn");
