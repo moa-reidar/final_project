@@ -109,10 +109,11 @@ function AddBook() {
               )
               .map((book, index) => (
                 <BookCard
-                  key={index}
-                  title={book.title}
-                  author={book.author}
-                />
+                key={index}
+                title={book.title}
+                author={book.author}
+                onDelete={() => handleDelete(index)}
+              />
               ))}
           </ul>
         </div>

@@ -1,7 +1,8 @@
-function BookCard(props) {
+function BookCard({ title, author, onDelete }) {
     return (
       <li>
-        {props.title} av {props.author}
+        {title} av {author}
+        <button onClick={onDelete}>🗑️ Slett</button>
       </li>
     );
   }
