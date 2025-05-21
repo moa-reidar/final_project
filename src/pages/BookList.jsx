@@ -41,16 +41,35 @@ function BookList() {
       {books.length === 0 ? (
         <p>Ingen bøker funnet.</p>
       ) : (
-        <ul>
-          {books.map((book, index) => (
-            <BookCard
-              key={index}
-              title={book.title}
-              author={book.author}
-              onDelete={() => handleDelete(index)}
+        <>
+          <div>
+            <label htmlFor="search">Søk:</label>
+            <input
+              type="text"
+              id="search"
+              placeholder="Søk etter tittel eller forfatter"
+              value={searchTerm}
+              onChange={(e) => setSearchTerm(e.target.value)}
             />
-          ))}
-        </ul>
+          </div>
+
+          <ul>
+            {books
+              .filter(
+                (book) =>
+                  book.title.toLowerCase().includes(searchTerm.toLowerCase()) ||
+                  book.author.toLowerCase().includes(searchTerm.toLowerCase())
+              )
+              .map((book, index) => (
+                <BookCard
+                  key={index}
+                  title={book.title}
+                  author={book.author}
+                  onDelete={() => handleDelete(index)}
+                />
+              ))}
+          </ul>
+        </>
       )}
     </div>
   );
