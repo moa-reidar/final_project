@@ -1,7 +1,9 @@
 import { useEffect, useState } from "react";
+import BookCard from "../components/BookCard";
 
 function BookList() {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
+  const [books, setBooks] = useState([]);
 
   useEffect(() => {
     const storedLogin = localStorage.getItem("isLoggedIn");
@@ -9,6 +11,19 @@ function BookList() {
       setIsLoggedIn(true);
     }
   }, []);
+
+  useEffect(() => {
+    const storedBooks = localStorage.getItem("books");
+    if (storedBooks) {
+      setBooks(JSON.parse(storedBooks));
+    }
+  }, []);
+
+  const handleDelete = (indexToRemove) => {
+    const updatedbooks = books.filter((_, index) => index !== indexToRemove);
+    setBooks(updatedBooks);
+    localStorage.setItem("books", JSON.stringify(updatedBooks));
+  };
 
   if (!isLoggedIn) {
     return (
@@ -22,11 +37,21 @@ function BookList() {
   return (
     <div>
       <h1>Book List</h1>
-      <ul>
-        <li>Harry Potter</li>
-        <li>Lord of the Rings</li>
-        <li>The Hobbit</li>
-      </ul>
+
+      {books.length === 0 ? (
+        <p>Ingen bøker funnet.</p>
+      ) : (
+        <ul>
+          {books.map((book, index) => (
+            <BookCard
+              key={index}
+              title={book.title}
+              author={book.author}
+              onDelete={() => handleDelete(index)}
+            />
+          ))}
+        </ul>
+      )}
     </div>
   );
 }
