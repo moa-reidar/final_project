@@ -1,4 +1,5 @@
 import { useState, useEffect } from "react";
+import BookCard from "../components/BookCard";
 
 function AddBook() {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
@@ -107,10 +108,11 @@ function AddBook() {
                 book.author.toLowerCase().includes(searchTerm.toLowerCase())
               )
               .map((book, index) => (
-                <li key={index}>
-                  {book.title} av {book.author}
-                  <button onClick={() => handleDelete(index)}>🗑️ Slett</button>
-                </li>
+                <BookCard
+                  key={index}
+                  title={book.title}
+                  author={book.author}
+                />
               ))}
           </ul>
         </div>
