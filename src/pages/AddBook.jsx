@@ -4,6 +4,7 @@ function AddBook() {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
   const [title, setTitle] = useState("");
   const [author, setAuthor] = useState("");
+  const [description, setDescription] = useState("");
   const [error, setError] = useState("");
 
   useEffect(() => {
@@ -66,6 +67,16 @@ function AddBook() {
           />
         </div>
 
+        <div>
+          <label htmlFor="description">Beskrivelse:</label>
+          <textarea
+            id="description"
+            rows="3"
+            value={description}
+            onChange={(e) => setDescription(e.target.value)}
+          />
+        </div>
+
         {error && <p style={{ color: "red" }}>{error}</p>}
 
         <button type="submit">Legg til bok</button>
@@ -75,3 +86,4 @@ function AddBook() {
 }
 
 export default AddBook;
+
