@@ -1,7 +1,9 @@
-function BookCard({ title, author, onDelete }) {
+function BookCard({ title, author, description, onDelete }) {
     return (
       <li>
-        {title} av {author}
+        <h3>{title}</h3>
+        <p><strong>Av:</strong> {author}</p>
+        {description && <p><strong>Beskrivelse:</strong> {description}</p>}
         <button onClick={onDelete}>🗑️ Slett</button>
       </li>
     );
