@@ -7,6 +7,7 @@ function AddBook() {
   const [description, setDescription] = useState("");
   const [genre, setGenre] = useState("");
   const [type, setType] = useState("");
+  const [imageUrl, setImageUrl] = useState("");
   const [error, setError] = useState("");
 
   useEffect(() => {
@@ -99,6 +100,16 @@ function AddBook() {
           />
         </div>
 
+        <div>
+          <label htmlFor="imageUrl">Bilde-URL (forside):</label>
+          <input
+            type="text"
+            id="imageUrl"
+            placeholder="https://..."
+            value={imageUrl}
+            onChange={(e) => setImageUrl(e.target.value)}
+          />
+        </div>
 
         {error && <p style={{ color: "red" }}>{error}</p>}
 
