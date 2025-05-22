@@ -6,6 +6,7 @@ function AddBook() {
   const [author, setAuthor] = useState("");
   const [description, setDescription] = useState("");
   const [genre, setGenre] = useState("");
+  const [type, setType] = useState("");
   const [error, setError] = useState("");
 
   useEffect(() => {
@@ -87,6 +88,17 @@ function AddBook() {
             onChange={(e) => setGenre(e.target.value)}
            />    
         </div>
+        
+        <div>
+         <label htmlFor="type">Type (roman, novelle, biografi, osv.):</label>
+         <input
+            type="text"
+            id="type"
+            value={type}
+            onChange={(e) => setType(e.target.value)}
+          />
+        </div>
+
 
         {error && <p style={{ color: "red" }}>{error}</p>}
 
