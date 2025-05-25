@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
 import { collection, addDoc } from "firebase/firestore";
-import { db } from "../Firebase";
+import { db } from "../firebase";
 
 function AddBook() {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
@@ -37,7 +37,7 @@ function AddBook() {
     };
 
     try {
-      addDoc(collection(db, "books"), newBook);
+      await addDoc(collection(db, "books"), newBook);
 
       setTitle("");
       setAuthor("");
