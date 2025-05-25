@@ -1,5 +1,10 @@
 import { useEffect, useState } from "react";
-import { collection, getDocs } from "firebase/firestore";
+import {
+  collection,
+  getDocs,
+  deleteDoc,
+  doc
+} from "firebase/firestore";
 import { db } from "../Firebase";
 import BookCard from "../components/BookCard";
 
@@ -32,10 +37,15 @@ function BookList() {
     fetchBooks();
   }, []);
 
-  const handleDelete = (indexToRemove) => {
-    const updatedBooks = books.filter((_, index) => index !== indexToRemove);
-    setBooks(updatedBooks);
-    
+  const handleDelete = async (idToDelete) => {
+    try {
+      await deleteDoc(doc(db, "books", idToDelete));
+      setBooks((prevBooks) =>
+        prevBooks.filter((book) => book.id !== idToDelete)
+      );
+    } catch (err) {
+      console.error("Feil ved sletting:", err);
+    }
   };
 
   if (!isLoggedIn) {
@@ -73,7 +83,7 @@ function BookList() {
                   book.title.toLowerCase().includes(searchTerm.toLowerCase()) ||
                   book.author.toLowerCase().includes(searchTerm.toLowerCase())
               )
-              .map((book, index) => (
+              .map((book) => (
                 <BookCard
                   key={book.id}
                   title={book.title}
@@ -82,7 +92,7 @@ function BookList() {
                   genre={book.genre}
                   type={book.type}
                   imageUrl={book.imageUrl}
-                  onDelete={() => handleDelete(index)}
+                  onDelete={() => handleDelete(book.id)}
                 />
               ))}
           </ul>
