@@ -25,7 +25,7 @@ function AddBook() {
       return;
     }
 
-    const newBook = { title, author, description, genre, type };
+    const newBook = { title, author, description, genre, type, imageUrl };
     const storedBooks = localStorage.getItem("books");
     const parsedBooks = storedBooks ? JSON.parse(storedBooks) : [];
 
