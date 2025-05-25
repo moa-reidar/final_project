@@ -1,4 +1,6 @@
 import { useEffect, useState } from "react";
+import { collection, getDocs } from "firebase/firestore";
+import { db } from "../Firebase";
 import BookCard from "../components/BookCard";
 
 function BookList() {
@@ -14,16 +16,26 @@ function BookList() {
   }, []);
 
   useEffect(() => {
-    const storedBooks = localStorage.getItem("books");
-    if (storedBooks) {
-      setBooks(JSON.parse(storedBooks));
-    }
+    const fetchBooks = async () => {
+      try {
+        const querySnapshot = await getDocs(collection(db, "books"));
+        const bookList = querySnapshot.docs.map((doc) => ({
+          id: doc.id,
+          ...doc.data(),
+        }));
+        setBooks(bookList);
+      } catch (err) {
+        console.error("Feil ved henting av bøker:", err);
+      }
+    };
+
+    fetchBooks();
   }, []);
 
   const handleDelete = (indexToRemove) => {
     const updatedBooks = books.filter((_, index) => index !== indexToRemove);
     setBooks(updatedBooks);
-    localStorage.setItem("books", JSON.stringify(updatedBooks));
+    
   };
 
   if (!isLoggedIn) {
@@ -63,9 +75,13 @@ function BookList() {
               )
               .map((book, index) => (
                 <BookCard
-                  key={index}
+                  key={book.id}
                   title={book.title}
                   author={book.author}
+                  description={book.description}
+                  genre={book.genre}
+                  type={book.type}
+                  imageUrl={book.imageUrl}
                   onDelete={() => handleDelete(index)}
                 />
               ))}
