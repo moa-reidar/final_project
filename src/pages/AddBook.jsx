@@ -1,4 +1,6 @@
 import { useState, useEffect } from "react";
+import { collection, addDoc } from "firebase/firestore";
+import { db } from "../Firebase";
 
 function AddBook() {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
@@ -17,7 +19,7 @@ function AddBook() {
     }
   }, []);
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
 
     if (!title || !author) {
@@ -25,16 +27,29 @@ function AddBook() {
       return;
     }
 
-    const newBook = { title, author, description, genre, type, imageUrl };
-    const storedBooks = localStorage.getItem("books");
-    const parsedBooks = storedBooks ? JSON.parse(storedBooks) : [];
+    const newBook = {
+      title,
+      author,
+      description,
+      genre,
+      type,
+      imageUrl,
+    };
 
-    const updatedBooks = [...parsedBooks, newBook];
-    localStorage.setItem("books", JSON.stringify(updatedBooks));
+    try {
+      addDoc(collection(db, "books"), newBook);
 
-    setTitle("");
-    setAuthor("");
-    setError("");
+      setTitle("");
+      setAuthor("");
+      setDescription("");
+      setGenre("");
+      setType("");
+      setImageUrl("");
+      setError("");
+    } catch (err) {
+      console.error("Feil ved lagring:", err);
+      setError("Kunne ikke lagre bok. Prøv igjen.");
+    }
   };
 
   if (!isLoggedIn) {
@@ -87,12 +102,12 @@ function AddBook() {
             id="genre"
             value={genre}
             onChange={(e) => setGenre(e.target.value)}
-           />    
+          />
         </div>
-        
+
         <div>
-         <label htmlFor="type">Type (roman, novelle, biografi, osv.):</label>
-         <input
+          <label htmlFor="type">Type (roman, novelle, biografi, osv.):</label>
+          <input
             type="text"
             id="type"
             value={type}
@@ -120,4 +135,3 @@ function AddBook() {
 }
 
 export default AddBook;
-
