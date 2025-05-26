@@ -1,4 +1,6 @@
 import { useState } from "react";
+import { collection, addDoc } from "firebase/firestore";
+import { db } from "../Firebase";
 
 function SearchBooks() {
   const [searchTerm, setSearchTerm] = useState("");
@@ -15,6 +17,27 @@ function SearchBooks() {
       setResults(data.docs);
     } catch (err) {
       console.error("Feil ved søk:", err);
+    }
+  };
+
+  const handleAddBook = async (book) => {
+    const newBook = {
+      title: book.title,
+      author: book.author_name?.[0] || "Ukjent",
+      imageUrl: book.cover_i
+        ? `https://covers.openlibrary.org/b/id/${book.cover_i}-M.jpg`
+        : "",
+      genre: book.subject?.[0] || "",
+      description: "",
+      type: "",
+    };
+
+    try {
+      await addDoc(collection(db, "books"), newBook);
+      alert("Bok lagt til i biblioteket!");
+    } catch (err) {
+      console.error("Kunne ikke lagre bok:", err);
+      alert("Feil ved lagring.");
     }
   };
 
@@ -55,6 +78,11 @@ function SearchBooks() {
               {book.subject && (
                 <small>Kategori: {book.subject[0]}</small>
               )}
+
+              {/* Legg til-knapp */}
+              <div>
+                <button onClick={() => handleAddBook(book)}>➕ Legg til</button>
+              </div>
             </div>
           </li>
         ))}
