@@ -5,10 +5,12 @@ import { db } from "../Firebase";
 function SearchBooks() {
   const [searchTerm, setSearchTerm] = useState("");
   const [results, setResults] = useState([]);
+  const [loading, setLoading] = useState(false);
 
   const handleSearch = async () => {
     if (!searchTerm.trim()) return;
 
+    setLoading(true);
     try {
       const response = await fetch(
         `https://openlibrary.org/search.json?q=${encodeURIComponent(searchTerm)}`
@@ -17,6 +19,8 @@ function SearchBooks() {
       setResults(data.docs);
     } catch (err) {
       console.error("Feil ved søk:", err);
+    } finally {
+      setLoading(false);
     }
   };
 
@@ -53,15 +57,15 @@ function SearchBooks() {
       />
       <button onClick={handleSearch}>Søk</button>
 
+      {loading && <p>Laster bøker...</p>}
+
       <ul>
         {results.slice(0, 10).map((book, index) => (
           <li key={index}>
             <div>
-              {/* Tittel */}
               <strong>{book.title}</strong>
               <br />
 
-              {/* Bilde */}
               {book.cover_i && (
                 <img
                   src={`https://covers.openlibrary.org/b/id/${book.cover_i}-M.jpg`}
@@ -69,17 +73,14 @@ function SearchBooks() {
                 />
               )}
 
-              {/* Forfatter */}
               {book.author_name && (
                 <p>av {book.author_name.slice(0, 2).join(", ")}</p>
               )}
 
-              {/* Kategori */}
               {book.subject && (
                 <small>Kategori: {book.subject[0]}</small>
               )}
 
-              {/* Legg til-knapp */}
               <div>
                 <button onClick={() => handleAddBook(book)}>➕ Legg til</button>
               </div>
