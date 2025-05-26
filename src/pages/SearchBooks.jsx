@@ -33,7 +33,27 @@ function SearchBooks() {
       <ul>
         {results.slice(0, 10).map((book, index) => (
           <li key={index}>
-            <strong>{book.title}</strong> {book.author_name && <>av {book.author_name.join(", ")}</>}
+            <div>
+              {/* Bilde hvis tilgjengelig */}
+              {book.cover_i && (
+                <img
+                  src={`https://covers.openlibrary.org/b/id/${book.cover_i}-M.jpg`}
+                  alt={`Forside: ${book.title}`}
+                  style={{ width: "100px", marginBottom: "0.5rem" }}
+                />
+              )}
+
+              <strong>{book.title}</strong>
+              {book.author_name && <> av {book.author_name.join(", ")}</>}
+              <br />
+
+              {/* Kategori/sjanger hvis tilgjengelig */}
+              {book.subject && (
+                <small style={{ color: "gray" }}>
+                  Kategori: {book.subject[0]}
+                </small>
+              )}
+            </div>
           </li>
         ))}
       </ul>
@@ -42,3 +62,4 @@ function SearchBooks() {
 }
 
 export default SearchBooks;
+
