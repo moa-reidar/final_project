@@ -17,6 +17,7 @@ function Header() {
           <li><Link to="/login">Login</Link></li>
           <li><Link to="/books">Book List</Link></li>
           <li><Link to="/add-book">Add Book</Link></li>
+          <li><Link to="/search">Søk i bokdatabase</Link></li>
           <li>
             <button onClick={handleLogout}>🚪 Logg ut</button>
           </li>

@@ -4,6 +4,7 @@ import Home from "./pages/Home";
 import Login from "./pages/Login";
 import BookList from "./pages/BookList";
 import AddBook from "./pages/AddBook";
+import SearchBooks from "./pages/SearchBooks";
 import NotFound from "./pages/NotFound";
 
 function App() {
@@ -15,6 +16,7 @@ function App() {
         <Route path="/login" element={<Login />} />
         <Route path="/books" element={<BookList />} />
         <Route path="/add-book" element={<AddBook />} />
+        <Route path="/search" element={<SearchBooks />} />
         <Route path="*" element={<NotFound />} />
       </Routes>
     </BrowserRouter>
