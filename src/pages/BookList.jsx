@@ -3,7 +3,7 @@ import {
   collection,
   getDocs,
   deleteDoc,
-  doc
+  doc,
 } from "firebase/firestore";
 import { db } from "../Firebase";
 import BookCard from "../components/BookCard";
@@ -53,35 +53,36 @@ function BookList() {
 
   if (!isLoggedIn) {
     return (
-      <div>
-        <h1>Ingen tilgang</h1>
-        <p>Du må være logget inn for å se boklisten.</p>
+      <div className="book-list__access-denied">
+        <h1 className="book-list__title">Ingen tilgang</h1>
+        <p className="book-list__message">Du må være logget inn for å se boklisten.</p>
       </div>
     );
   }
 
   return (
-    <div>
-      <h1>Book List</h1>
+    <div className="book-list">
+      <h1 className="book-list__heading">Bokliste</h1>
 
       {loading ? (
-        <p>Laster bøker...</p>
+        <p className="book-list__loading">Laster bøker...</p>
       ) : books.length === 0 ? (
-        <p>Ingen bøker funnet.</p>
+        <p className="book-list__empty">Ingen bøker funnet.</p>
       ) : (
         <>
-          <div>
-            <label htmlFor="search">Søk:</label>
+          <div className="book-list__search">
+            <label htmlFor="search" className="book-list__label">Søk:</label>
             <input
               type="text"
               id="search"
+              className="book-list__input"
               placeholder="Søk etter tittel eller forfatter"
               value={searchTerm}
               onChange={(e) => setSearchTerm(e.target.value)}
             />
           </div>
 
-          <ul>
+          <ul className="book-list__items">
             {books
               .filter(
                 (book) =>
