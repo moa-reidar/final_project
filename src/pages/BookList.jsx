@@ -12,6 +12,7 @@ function BookList() {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
   const [books, setBooks] = useState([]);
   const [searchTerm, setSearchTerm] = useState("");
+  const [loading, setLoading] = useState(true);
 
   useEffect(() => {
     const storedLogin = localStorage.getItem("isLoggedIn");
@@ -31,6 +32,8 @@ function BookList() {
         setBooks(bookList);
       } catch (err) {
         console.error("Feil ved henting av bøker:", err);
+      } finally {
+        setLoading(false);
       }
     };
 
@@ -61,7 +64,9 @@ function BookList() {
     <div>
       <h1>Book List</h1>
 
-      {books.length === 0 ? (
+      {loading ? (
+        <p>Laster bøker...</p>
+      ) : books.length === 0 ? (
         <p>Ingen bøker funnet.</p>
       ) : (
         <>
