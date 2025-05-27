@@ -1,11 +1,19 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { collection, addDoc } from "firebase/firestore";
 import { db } from "../Firebase";
 
 function SearchBooks() {
+  const [isLoggedIn, setIsLoggedIn] = useState(false);
   const [searchTerm, setSearchTerm] = useState("");
   const [results, setResults] = useState([]);
   const [loading, setLoading] = useState(false);
+
+  useEffect(() => {
+    const storedLogin = localStorage.getItem("isLoggedIn");
+    if (storedLogin === "true") {
+      setIsLoggedIn(true);
+    }
+  }, []);
 
   const handleSearch = async () => {
     if (!searchTerm.trim()) return;
@@ -44,6 +52,15 @@ function SearchBooks() {
       alert("Feil ved lagring.");
     }
   };
+
+  if (!isLoggedIn) {
+    return (
+      <div>
+        <h1>Ingen tilgang</h1>
+        <p>Du må være logget inn for å søke etter bøker.</p>
+      </div>
+    );
+  }
 
   return (
     <div>
