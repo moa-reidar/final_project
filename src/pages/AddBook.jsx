@@ -2,7 +2,6 @@ import { useState, useEffect } from "react";
 import { collection, addDoc } from "firebase/firestore";
 import { db } from "../Firebase";
 
-
 function AddBook() {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
   const [title, setTitle] = useState("");
@@ -28,18 +27,10 @@ function AddBook() {
       return;
     }
 
-    const newBook = {
-      title,
-      author,
-      description,
-      genre,
-      type,
-      imageUrl,
-    };
+    const newBook = { title, author, description, genre, type, imageUrl };
 
     try {
       await addDoc(collection(db, "books"), newBook);
-
       setTitle("");
       setAuthor("");
       setDescription("");
@@ -55,81 +46,89 @@ function AddBook() {
 
   if (!isLoggedIn) {
     return (
-      <div>
-        <h1>Ingen tilgang</h1>
-        <p>Du må være logget inn for å legge til en bok.</p>
+      <div className="add-book__access-denied">
+        <h1 className="add-book__title">Ingen tilgang</h1>
+        <p className="add-book__message">
+          Du må være logget inn for å legge til en bok.
+        </p>
       </div>
     );
   }
 
   return (
-    <div>
-      <h1>Add Book</h1>
-      <form onSubmit={handleSubmit}>
-        <div>
-          <label htmlFor="title">Tittel:</label>
+    <div className="add-book">
+      <h1 className="add-book__heading">Legg til bok</h1>
+      <form className="add-book__form" onSubmit={handleSubmit}>
+        <div className="add-book__field">
+          <label htmlFor="title" className="add-book__label">Tittel:</label>
           <input
             type="text"
             id="title"
+            className="add-book__input"
             value={title}
             onChange={(e) => setTitle(e.target.value)}
           />
         </div>
 
-        <div>
-          <label htmlFor="author">Forfatter:</label>
+        <div className="add-book__field">
+          <label htmlFor="author" className="add-book__label">Forfatter:</label>
           <input
             type="text"
             id="author"
+            className="add-book__input"
             value={author}
             onChange={(e) => setAuthor(e.target.value)}
           />
         </div>
 
-        <div>
-          <label htmlFor="description">Beskrivelse:</label>
+        <div className="add-book__field">
+          <label htmlFor="description" className="add-book__label">Beskrivelse:</label>
           <textarea
             id="description"
+            className="add-book__textarea"
             rows="3"
             value={description}
             onChange={(e) => setDescription(e.target.value)}
           />
         </div>
 
-        <div>
-          <label htmlFor="genre">Sjanger:</label>
+        <div className="add-book__field">
+          <label htmlFor="genre" className="add-book__label">Sjanger:</label>
           <input
             type="text"
             id="genre"
+            className="add-book__input"
             value={genre}
             onChange={(e) => setGenre(e.target.value)}
           />
         </div>
 
-        <div>
-          <label htmlFor="type">Type (roman, novelle, biografi, osv.):</label>
+        <div className="add-book__field">
+          <label htmlFor="type" className="add-book__label">Type:</label>
           <input
             type="text"
             id="type"
+            className="add-book__input"
             value={type}
             onChange={(e) => setType(e.target.value)}
           />
         </div>
 
-        <div>
-          <label htmlFor="imageUrl">Bilde-URL (forside):</label>
+        <div className="add-book__field">
+          <label htmlFor="imageUrl" className="add-book__label">Bilde-URL:</label>
           <input
             type="text"
             id="imageUrl"
+            className="add-book__input"
             placeholder="https://..."
             value={imageUrl}
             onChange={(e) => setImageUrl(e.target.value)}
           />
         </div>
 
-        {error && <p style={{ color: "red" }}>{error}</p>}
+        {error && <p className="add-book__error">{error}</p>}
 
-        <button type="submit">Legg til bok</button>
+        <button type="submit" className="add-book__submit">Legg til bok</button>
       </form>
     </div>
   );
