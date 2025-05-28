@@ -27,6 +27,9 @@ function Login() {
     if (username === "admin" && password === "1234") {
       setIsLoggedIn(true);
       setError("");
+      localStorage.setItem("isLoggedIn", "true");
+      localStorage.setItem("username", username);
+      window.dispatchEvent(new Event("storage")); 
     } else {
       setError("Feil brukernavn eller passord.");
       setIsLoggedIn(false);
@@ -39,6 +42,7 @@ function Login() {
     setPassword("");
     localStorage.removeItem("isLoggedIn");
     localStorage.removeItem("username");
+    window.dispatchEvent(new Event("storage")); 
   };
 
   return (
