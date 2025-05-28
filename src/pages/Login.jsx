@@ -6,7 +6,6 @@ function Login() {
   const [error, setError] = useState("");
   const [isLoggedIn, setIsLoggedIn] = useState(false);
 
-  
   useEffect(() => {
     const storedLogin = localStorage.getItem("isLoggedIn");
     const storedUser = localStorage.getItem("username");
@@ -17,7 +16,6 @@ function Login() {
     }
   }, []);
 
-  
   useEffect(() => {
     localStorage.setItem("isLoggedIn", isLoggedIn);
     localStorage.setItem("username", username);
@@ -35,37 +33,54 @@ function Login() {
     }
   };
 
+  const handleLogout = () => {
+    setIsLoggedIn(false);
+    setUsername("");
+    setPassword("");
+    localStorage.removeItem("isLoggedIn");
+    localStorage.removeItem("username");
+  };
+
   return (
-    <div>
-      <h1>Login</h1>
+    <div className="login">
+      <h1 className="login__heading">Login</h1>
 
       {isLoggedIn ? (
-        <p>Du er logget inn som <strong>{username}</strong></p>
+        <div className="login__status">
+          <p className="login__message">
+            ✅ Du er logget inn som <strong>{username}</strong>
+          </p>
+          <button className="login__logout-button" onClick={handleLogout}>
+            Logg ut
+          </button>
+        </div>
       ) : (
-        <form onSubmit={handleSubmit}>
-          <div>
-            <label htmlFor="username">Brukernavn:</label>
+        <form className="login__form" onSubmit={handleSubmit}>
+          <div className="login__field">
+            <label htmlFor="username" className="login__label">Brukernavn:</label>
             <input
               type="text"
               id="username"
+              className="login__input"
               value={username}
               onChange={(e) => setUsername(e.target.value)}
             />
           </div>
 
-          <div>
-            <label htmlFor="password">Passord:</label>
+          <div className="login__field">
+            <label htmlFor="password" className="login__label">Passord:</label>
             <input
               type="password"
               id="password"
+              className="login__input"
               value={password}
               onChange={(e) => setPassword(e.target.value)}
             />
           </div>
 
-          {error && <p style={{ color: "red" }}>{error}</p>}
+          {error && <p className="login__error">{error}</p>}
 
-          <button type="submit">Logg inn</button>
+          <button type="submit" className="login__submit-button">Logg inn</button>
         </form>
       )}
     </div>
