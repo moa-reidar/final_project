@@ -25,6 +25,11 @@ import "./css/footer.css";
 import "./css/bookcard.css";
 import "./css/login.css";
 import "./css/form.css";
+import "./css/home.css";
+import "./css/booklist.css";
+import "./css/notfound.css";
+import "./css/search.css";
+
 
 function App() {
   return (
