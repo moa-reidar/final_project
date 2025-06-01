@@ -48,9 +48,7 @@ function AddBook() {
     return (
       <div className="add-book__access-denied">
         <h1 className="add-book__title">Ingen tilgang</h1>
-        <p className="add-book__message">
-          Du må være logget inn for å legge til en bok.
-        </p>
+        <p className="add-book__message">Du må være logget inn for å legge til en bok.</p>
       </div>
     );
   }
@@ -58,77 +56,76 @@ function AddBook() {
   return (
     <div className="add-book">
       <h1 className="add-book__heading">Legg til bok</h1>
-      <form className="add-book__form" onSubmit={handleSubmit}>
-        <div className="add-book__field">
-          <label htmlFor="title" className="add-book__label">Tittel:</label>
+      <form className="form" onSubmit={handleSubmit}>
+        <div className="form__group">
+          <label htmlFor="title">Tittel:</label>
           <input
             type="text"
             id="title"
-            className="add-book__input"
+            className="form__input"
             value={title}
             onChange={(e) => setTitle(e.target.value)}
           />
         </div>
 
-        <div className="add-book__field">
-          <label htmlFor="author" className="add-book__label">Forfatter:</label>
+        <div className="form__group">
+          <label htmlFor="author">Forfatter:</label>
           <input
             type="text"
             id="author"
-            className="add-book__input"
+            className="form__input"
             value={author}
             onChange={(e) => setAuthor(e.target.value)}
           />
         </div>
 
-        <div className="add-book__field">
-          <label htmlFor="description" className="add-book__label">Beskrivelse:</label>
+        <div className="form__group">
+          <label htmlFor="description">Beskrivelse:</label>
           <textarea
             id="description"
-            className="add-book__textarea"
-            rows="3"
+            className="form__textarea"
             value={description}
             onChange={(e) => setDescription(e.target.value)}
           />
         </div>
 
-        <div className="add-book__field">
-          <label htmlFor="genre" className="add-book__label">Sjanger:</label>
+        <div className="form__group">
+          <label htmlFor="genre">Sjanger:</label>
           <input
             type="text"
             id="genre"
-            className="add-book__input"
+            className="form__input"
             value={genre}
             onChange={(e) => setGenre(e.target.value)}
           />
         </div>
 
-        <div className="add-book__field">
-          <label htmlFor="type" className="add-book__label">Type:</label>
+        <div className="form__group">
+          <label htmlFor="type">Type:</label>
           <input
             type="text"
             id="type"
-            className="add-book__input"
+            className="form__input"
             value={type}
             onChange={(e) => setType(e.target.value)}
           />
         </div>
 
-        <div className="add-book__field">
-          <label htmlFor="imageUrl" className="add-book__label">Bilde-URL:</label>
+        <div className="form__group">
+          <label htmlFor="imageUrl">Bilde-URL:</label>
           <input
             type="text"
             id="imageUrl"
-            className="add-book__input"
+            className="form__input"
             placeholder="https://..."
             value={imageUrl}
             onChange={(e) => setImageUrl(e.target.value)}
           />
         </div>
 
-        {error && <p className="add-book__error">{error}</p>}
+        {error && <p className="form__error">{error}</p>}
 
-        <button type="submit" className="add-book__submit">Legg til bok</button>
+        <button type="submit">Legg til bok</button>
       </form>
     </div>
   );

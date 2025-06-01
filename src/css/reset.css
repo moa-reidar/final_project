@@ -5,16 +5,6 @@
     box-sizing: border-box;
   }
   
-  input,
-  button,
-  textarea,
-  select {
-    font: inherit;
-    border: none;
-    outline: none;
-    background: none;
-  }
-  
   ul,
   ol {
     list-style: none;
