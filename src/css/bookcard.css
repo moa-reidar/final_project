@@ -1,41 +1,56 @@
 .book-card {
-    display: flex;
-    flex-direction: column;
-    background-color: var(--color-surface);
-    border: var(--border-width) solid var(--color-border);
-    border-radius: var(--border-radius);
-    padding: var(--spacing-md);
-    margin-bottom: var(--spacing-md);
-    box-shadow: var(--box-shadow);
-  }
-  
-  .book-card__image {
-    max-width: 150px;
-    margin-bottom: var(--spacing-sm);
-    align-self: center;
-  }
-  
-  .book-card__title {
-    font-size: var(--font-size-large);
-    font-weight: var(--font-weight-bold);
-    margin-bottom: var(--spacing-xs);
-  }
-  
-  .book-card__info {
-    font-size: var(--font-size-small);
-    margin-bottom: var(--spacing-xs);
-  }
-  
-  .book-card__delete-button {
-    align-self: flex-start;
-    background-color: var(--color-error);
-    color: var(--color-text-light);
-    padding: var(--spacing-xs) var(--spacing-sm);
-    border-radius: var(--border-radius);
-    transition: background-color var(--transition-fast);
-  }
-  
-  .book-card__delete-button:hover {
-    background-color: darkred;
-  }
-  
+  display: flex;
+  flex-direction: row;
+  align-items: flex-start;
+  gap: var(--spacing-md);
+  background-color: var(--color-surface);
+  border: var(--border-width) solid var(--color-border);
+  border-radius: var(--border-radius);
+  padding: var(--spacing-md);
+  margin: 0 auto var(--spacing-md);
+  max-width: 700px;
+  box-shadow: var(--box-shadow);
+}
+
+.book-card__image {
+  width: 120px;
+  height: auto;
+  object-fit: cover;
+  border-radius: var(--border-radius);
+  box-shadow: var(--box-shadow-light);
+}
+
+.book-card__content {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-xs);
+}
+
+.book-card__title {
+  font-size: var(--font-size-large);
+  font-weight: var(--font-weight-bold);
+  margin: 0;
+}
+
+.book-card__info {
+  font-size: var(--font-size-small);
+  margin: 0;
+  color: var(--color-text);
+}
+
+.book-card__delete-button {
+  align-self: flex-start;
+  background-color: var(--color-error);
+  color: var(--color-text-light);
+  padding: var(--spacing-xs) var(--spacing-sm);
+  border-radius: var(--border-radius);
+  border: none;
+  cursor: pointer;
+  font-weight: bold;
+  transition: background-color var(--transition-fast);
+}
+
+.book-card__delete-button:hover {
+  background-color: darkred;
+}

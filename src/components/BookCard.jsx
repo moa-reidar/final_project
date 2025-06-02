@@ -11,32 +11,35 @@ function BookCard({ title, author, description, genre, type, imageUrl, onDelete 
         </div>
       )}
 
-      <h3 className="book-card__title">{title}</h3>
-      <p className="book-card__author">
-        <strong>Av:</strong> {author}
-      </p>
+      <div className="book-card__content">
+        <h3 className="book-card__title">{title}</h3>
 
-      {genre && (
-        <p className="book-card__genre">
-          <strong>Sjanger:</strong> {genre}
+        <p className="book-card__info">
+          <strong>Av:</strong> {author}
         </p>
-      )}
 
-      {type && (
-        <p className="book-card__type">
-          <strong>Type:</strong> {type}
-        </p>
-      )}
+        {genre && (
+          <p className="book-card__info">
+            <strong>Sjanger:</strong> {genre}
+          </p>
+        )}
 
-      {description && (
-        <p className="book-card__description">
-          <strong>Beskrivelse:</strong> {description}
-        </p>
-      )}
+        {type && (
+          <p className="book-card__info">
+            <strong>Type:</strong> {type}
+          </p>
+        )}
 
-      <button className="book-card__delete-button" onClick={onDelete}>
-        🗑️ Slett
-      </button>
+        {description && (
+          <p className="book-card__info">
+            <strong>Beskrivelse:</strong> {description}
+          </p>
+        )}
+
+        <button className="book-card__delete-button" onClick={onDelete}>
+          🗑️ Slett
+        </button>
+      </div>
     </li>
   );
 }
