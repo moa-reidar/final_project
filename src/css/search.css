@@ -1,0 +1,111 @@
+.search {
+    padding: 2rem;
+    max-width: 800px;
+    margin: 0 auto;
+  }
+  
+  .search__heading {
+    font-size: var(--font-size-xlarge);
+    color: var(--color-heading);
+    margin-bottom: var(--spacing-md);
+    text-align: center;
+  }
+  
+  .search__bar {
+    display: flex;
+    gap: var(--spacing-sm);
+    margin-bottom: var(--spacing-md);
+    justify-content: center;
+    flex-wrap: wrap;
+  }
+  
+  .search__input {
+    flex: 1;
+    min-width: 200px;
+    padding: 0.5rem;
+    border: 1px solid var(--color-border);
+    border-radius: var(--border-radius);
+    font-size: 1rem;
+    background-color: var(--color-background);
+    color: var(--color-text);
+  }
+  
+  .search__button {
+    padding: 0.5rem 1rem;
+    background-color: var(--color-primary);
+    color: #fff;
+    border: none;
+    border-radius: var(--border-radius);
+    font-weight: bold;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+  }
+  
+  .search__button:hover {
+    background-color: var(--color-accent);
+  }
+  
+  .search__loading {
+    text-align: center;
+    color: var(--color-accent);
+    margin-top: var(--spacing-sm);
+  }
+  
+  .search__results {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: grid;
+    gap: var(--spacing-md);
+  }
+  
+  .search__result {
+    border: 1px solid var(--color-border);
+    padding: var(--spacing-md);
+    border-radius: var(--border-radius);
+    background-color: var(--color-surface);
+    box-shadow: var(--box-shadow);
+  }
+  
+  .search__book {
+    display: flex;
+    flex-direction: column;
+    gap: var(--spacing-sm);
+    align-items: center;
+    text-align: center;
+  }
+  
+  .search__book-image {
+    max-width: 120px;
+    height: auto;
+    border-radius: var(--border-radius);
+  }
+  
+  .search__book-title {
+    font-size: var(--font-size-medium);
+    font-weight: var(--font-weight-bold);
+  }
+  
+  .search__book-author,
+  .search__book-category {
+    font-size: var(--font-size-small);
+    color: var(--color-text);
+  }
+  
+  .search__book-actions {
+    margin-top: var(--spacing-sm);
+  }
+  
+  .search__add-button {
+    background-color: var(--color-primary);
+    color: white;
+    padding: var(--spacing-xs) var(--spacing-sm);
+    border: none;
+    border-radius: var(--border-radius);
+    cursor: pointer;
+  }
+  
+  .search__add-button:hover {
+    background-color: var(--color-accent);
+  }
+  
