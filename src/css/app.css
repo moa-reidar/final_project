@@ -1,0 +1,17 @@
+.app {
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+    background-color: var(--color-background);
+    color: var(--color-text);
+    font-family: var(--font-family-base);
+  }
+  
+  .app__main {
+    flex: 1;
+    padding: var(--spacing-md);
+    max-width: var(--max-width-container);
+    margin: 0 auto;
+    width: 100%;
+  }
+  
