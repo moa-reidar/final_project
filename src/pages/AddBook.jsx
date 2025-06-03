@@ -23,7 +23,7 @@ function AddBook() {
     e.preventDefault();
 
     if (!title || !author) {
-      setError("Alle felt må fylles ut.");
+      setError("Tittel og forfatter må fylles inn...");
       return;
     }
 
