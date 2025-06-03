@@ -11,6 +11,7 @@ function AddBook() {
   const [type, setType] = useState("");
   const [imageUrl, setImageUrl] = useState("");
   const [error, setError] = useState("");
+  const [statusMessage, setStatusMessage] = useState("");
 
   useEffect(() => {
     const storedLogin = localStorage.getItem("isLoggedIn");
@@ -38,9 +39,12 @@ function AddBook() {
       setType("");
       setImageUrl("");
       setError("");
+      setStatusMessage(`✅ "${title}" ble lagt til i boklisten`);
     } catch (err) {
       console.error("Feil ved lagring:", err);
-      setError("Kunne ikke lagre bok. Prøv igjen.");
+      setError("❌ Kunne ikke lagre bok. Prøv igjen.");
+    } finally {
+      setTimeout(() => setStatusMessage(""), 3000);
     }
   };
 
@@ -56,6 +60,9 @@ function AddBook() {
   return (
     <div className="add-book">
       <h1 className="add-book__heading">Legg til bok</h1>
+
+      {statusMessage && <p className="form__status">{statusMessage}</p>}
+
       <form className="form" onSubmit={handleSubmit}>
         <div className="form__group">
           <label htmlFor="title">Tittel:</label>
