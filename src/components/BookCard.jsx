@@ -1,22 +1,25 @@
+import fallbackImage from "../assets/img/fallback.png";
+
 function BookCard({ title, author, description, genre, type, imageUrl, onDelete }) {
   return (
     <li className="book-card">
-      {imageUrl && (
-        <div className="book-card__image-wrapper">
-          <img
-            src={imageUrl}
-            alt={`Omslag for ${title}`}
-            className="book-card__image"
-          />
-        </div>
-      )}
-
       <div className="book-card__content">
         <h3 className="book-card__title">{title}</h3>
 
-        <p className="book-card__info">
-          <strong>Av:</strong> {author}
-        </p>
+        <div className="book-card__image-wrapper">
+          <img
+            src={imageUrl || fallbackImage}
+            alt={`Omslag for ${title}`}
+            className={`book-card__image ${!imageUrl ? "fallback" : ""}`}
+            onError={(e) => {
+              e.target.onerror = null;
+              e.target.src = fallbackImage;
+              e.target.classList.add("fallback");
+            }}
+          />
+        </div>
+
+        <p className="book-card__info"><strong>Av:</strong> {author}</p>
 
         {genre && (
           <p className="book-card__info">

@@ -1,23 +1,36 @@
 .book-card {
   display: flex;
-  flex-direction: row;
-  align-items: flex-start;
+  flex-direction: column;
+  align-items: center;
   gap: var(--spacing-md);
   background-color: var(--color-surface);
   border: var(--border-width) solid var(--color-border);
   border-radius: var(--border-radius);
   padding: var(--spacing-md);
   margin: 0 auto var(--spacing-md);
-  max-width: 700px;
+  min-width: 250px;
+  width: 100%;
+  max-width: 100%;
   box-shadow: var(--box-shadow);
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
 }
 
 .book-card__image {
-  width: 120px;
+  width: 100%;
+  max-width: 160px;
   height: auto;
   object-fit: cover;
   border-radius: var(--border-radius);
   box-shadow: var(--box-shadow-light);
+  display: block;
+  margin: 0 auto;
+}
+
+.book-card__image.fallback {
+  width: 120px;
+  height: 120px;
+  object-fit: contain;
+  opacity: 0.8;
 }
 
 .book-card__content {
@@ -25,22 +38,24 @@
   display: flex;
   flex-direction: column;
   gap: var(--spacing-xs);
+  align-items: center;
 }
 
 .book-card__title {
   font-size: var(--font-size-large);
   font-weight: var(--font-weight-bold);
   margin: 0;
+  text-align: center;
 }
 
 .book-card__info {
   font-size: var(--font-size-small);
   margin: 0;
   color: var(--color-text);
+  text-align: center;
 }
 
 .book-card__delete-button {
-  align-self: flex-start;
   background-color: var(--color-error);
   color: var(--color-text-light);
   padding: var(--spacing-xs) var(--spacing-sm);
@@ -49,8 +64,14 @@
   cursor: pointer;
   font-weight: bold;
   transition: background-color var(--transition-fast);
+  margin-top: var(--spacing-sm);
 }
 
 .book-card__delete-button:hover {
   background-color: darkred;
+}
+
+.book-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
 }
