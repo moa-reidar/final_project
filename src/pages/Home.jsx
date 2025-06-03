@@ -4,10 +4,14 @@ function Home() {
   return (
     <div className="home">
       <h1 className="home__heading">Velkommen til Book Library App 📚</h1>
-
       <p className="home__description">
+              Dette er en enkel og pedagogisk applikasjon laget for å lære React,
+              Firebase og API-integrasjon. Her kan du søke etter bøker, lagre dine egne
+              og hente data fra Open Library.
+            </p>
+      <h2 className="home__description">
         Dette er din personlige digitale bokhylle. Du kan:
-      </p>
+      </h2>
       <ul className="home__features">
         <li>🔐 Logge inn for å sikre din personlige bokliste</li>
         <li>➕ Legge til bøker du vil huske</li>

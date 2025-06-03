@@ -28,7 +28,7 @@
 
 .book-card__image.fallback {
   width: 120px;
-  height: 120px;
+  height: 263px;
   object-fit: contain;
   opacity: 0.8;
 }
