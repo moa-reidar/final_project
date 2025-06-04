@@ -65,14 +65,14 @@ src/
 > ⚠️ Ensure you have Firebase configured and that the Firestore database includes a `books` collection.
 
 
-## 🔐 Login Credentials
+## Login Credentials
 
 - **Username:** `admin`  
 - **Password:** `1234`
 
 ---
 
-## 💡 Notable Concepts
+## Notable Concepts
 
 ### 1. Storage Event Handling  
 Used to dynamically update the navbar when login/logout occurs.  
@@ -83,7 +83,7 @@ Fallback icon is shown if the book image is missing or broken.
 
 ---
 
-## 🚀 Future Improvements
+## Future Improvements
 
 - ✏️ Add book editing support  
 - Use Firebase Auth for secure login  
@@ -92,7 +92,7 @@ Fallback icon is shown if the book image is missing or broken.
 
 ---
 
-## 👤 Developed By
+## Developed By
 
 - **Moa**  
 - Frontend Development – FFU1200  

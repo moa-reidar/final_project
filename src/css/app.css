@@ -1,10 +1,26 @@
+@font-face {
+  font-family: "Roboto-Regular";
+  src: url(../assets/fonts/Roboto-Regular.ttf);
+}
+
+@font-face {
+  font-family: "Roboto-Bold";
+  src: url(../assets/fonts/Roboto-Bold.ttf);
+}
+
+@font-face {
+  font-family: "Oswald";
+  src: url(../assets/fonts/Oswald-VariableFont_wght.ttf);
+}
+
+
 .app {
     display: flex;
     flex-direction: column;
     min-height: 100vh;
     background-color: var(--color-background);
     color: var(--color-text);
-    font-family: var(--font-family-base);
+    font-family: var(--font-family-base, Arial, Helvetica, sans-serif);
   }
   
   .app__main {
