@@ -1,3 +1,6 @@
+Netlify link: https://fluffy-faun-ad485b.netlify.app/
+Github Link : https://github.com/moa-reidar/final_project.git
+
 # Book Library App
 
 A modern and responsive book management app built with React. This project was developed as the final assignment for the Frontend Development course (FFU1200) and showcases key frontend principles including component-based architecture, API integration, CRUD operations with Firebase, and modular CSS styling using BEM methodology.
