@@ -62,7 +62,7 @@ src/
 3. Start the server:  
    `npm run dev`
 
-> ⚠️ Ensure you have Firebase configured and that the Firestore database includes a `books` collection.
+>  Ensure you have Firebase configured and that the Firestore database includes a `books` collection.
 
 
 ## Login Credentials
